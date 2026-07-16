@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="875" viewBox="0 0 1400 875">
+  <rect width="1400" height="875" fill="#0a0a0b"/>
+  <rect x="120" y="145" width="1160" height="590" rx="28" fill="#101114" stroke="#292a30" stroke-width="3"/>
+  <rect x="165" y="195" width="245" height="490" rx="18" fill="#15161a"/>
+  <rect x="455" y="195" width="350" height="210" rx="18" fill="#15161a"/>
+  <rect x="850" y="195" width="385" height="210" rx="18" fill="#15161a"/>
+  <rect x="455" y="450" width="780" height="235" rx="18" fill="#15161a"/>
+  <g fill="none" stroke="#3478f6" stroke-width="9" stroke-linecap="round">
+    <path d="M505 355L575 290L640 320L720 235L762 268"/>
+    <path d="M900 330A120 120 0 0 1 1125 270"/>
+  </g>
+  <g fill="#3478f6">
+    <rect x="510" y="610" width="48" height="32" rx="6"/>
+    <rect x="585" y="560" width="48" height="82" rx="6"/>
+    <rect x="660" y="520" width="48" height="122" rx="6"/>
+    <rect x="735" y="585" width="48" height="57" rx="6"/>
+    <rect x="810" y="490" width="48" height="152" rx="6"/>
+    <rect x="885" y="545" width="48" height="97" rx="6"/>
+    <rect x="960" y="505" width="48" height="137" rx="6"/>
+    <rect x="1035" y="455" width="48" height="187" rx="6"/>
+  </g>
+  <text x="92" y="96" fill="#777b85" font-family="Arial, sans-serif" font-size="28" letter-spacing="5">SYSTEM 03 / AUTOMATION &amp; DATA</text>
+  <text x="90" y="810" fill="#eaeaea" font-family="Arial, sans-serif" font-size="54">Operational dashboards and workflows</text>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="875" viewBox="0 0 1400 875">
+  <rect width="1400" height="875" fill="#0a0a0b"/>
+  <g fill="none" stroke="#25262b" stroke-width="2">
+    <circle cx="700" cy="440" r="300"/>
+    <circle cx="700" cy="440" r="210"/>
+    <circle cx="700" cy="440" r="120"/>
+    <path d="M70 440H1330M700 70V805"/>
+  </g>
+  <path d="M270 655C425 515 430 305 620 285C840 260 885 565 1130 265"
+        fill="none" stroke="#3478f6" stroke-width="8" stroke-linecap="round" stroke-dasharray="18 18"/>
+  <g transform="translate(595 330)">
+    <rect x="0" y="80" width="240" height="170" rx="35" fill="#17181c" stroke="#8b8f99" stroke-width="8"/>
+    <rect x="58" y="18" width="124" height="92" rx="15" fill="#111216" stroke="#3478f6" stroke-width="8"/>
+    <circle cx="78" cy="265" r="54" fill="#0a0a0b" stroke="#8b8f99" stroke-width="14"/>
+    <circle cx="198" cy="265" r="54" fill="#0a0a0b" stroke="#8b8f99" stroke-width="14"/>
+    <circle cx="120" cy="64" r="14" fill="#3478f6"/>
+  </g>
+  <text x="92" y="96" fill="#777b85" font-family="Arial, sans-serif" font-size="28" letter-spacing="5">SYSTEM 02 / AUTONOMOUS ROBOTICS</text>
+  <text x="90" y="790" fill="#eaeaea" font-family="Arial, sans-serif" font-size="54">ROS1 Â· SLAM Â· A* navigation</text>
+</svg>

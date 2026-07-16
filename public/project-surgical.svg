@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="875" viewBox="0 0 1400 875">
+  <rect width="1400" height="875" fill="#0a0a0b"/>
+  <g stroke="#25262b" stroke-width="1">
+    <path d="M80 120H1320M80 240H1320M80 360H1320M80 480H1320M80 600H1320M80 720H1320"/>
+    <path d="M200 70V805M400 70V805M600 70V805M800 70V805M1000 70V805M1200 70V805"/>
+  </g>
+  <g fill="none" stroke="#8b8f99" stroke-width="20" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M250 625L475 500L710 555L945 390L1135 455"/>
+    <path d="M1135 455L1240 415"/>
+    <path d="M1135 455L1232 505"/>
+  </g>
+  <g fill="#0a0a0b" stroke="#3478f6" stroke-width="9">
+    <circle cx="250" cy="625" r="46"/>
+    <circle cx="475" cy="500" r="40"/>
+    <circle cx="710" cy="555" r="40"/>
+    <circle cx="945" cy="390" r="40"/>
+    <circle cx="1135" cy="455" r="34"/>
+  </g>
+  <g fill="#3478f6">
+    <circle cx="250" cy="625" r="10"/>
+    <circle cx="475" cy="500" r="10"/>
+    <circle cx="710" cy="555" r="10"/>
+    <circle cx="945" cy="390" r="10"/>
+    <circle cx="1135" cy="455" r="8"/>
+  </g>
+  <text x="92" y="96" fill="#777b85" font-family="Arial, sans-serif" font-size="28" letter-spacing="5">SYSTEM 01 / MEDICAL ROBOTICS</text>
+  <text x="90" y="790" fill="#eaeaea" font-family="Arial, sans-serif" font-size="54">Teleoperated surgical instrument</text>
+</svg>
