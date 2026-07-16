@@ -1,4 +1,4 @@
-# Tarek Ben El Mekki Portfolio
+﻿# My Portfolio
 
 A minimalist one-page engineering portfolio built with:
 
