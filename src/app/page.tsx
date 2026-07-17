@@ -1,4 +1,4 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import {
   ArrowDown,
   ArrowUpRight,
@@ -7,8 +7,8 @@ import {
   Mail,
 } from "lucide-react";
 
-import { ProjectCard } from "@/components/ProjectCard";
-import { Timeline } from "@/components/Timeline";
+import { ProjectCarousel } from "@/components/ProjectCarousel";
+import { JourneyChart } from "@/components/JourneyChart";
 import {
   academicTimeline,
   associativeTimeline,
@@ -18,12 +18,11 @@ import {
 } from "@/data/portfolio";
 
 const profileAsset = "/profile.png";
-const cvHref = "mailto:benmekkitarek@gmail.com?subject=CV%20request";
+const cvHref =
+  "mailto:benmekkitarek@gmail.com?subject=Tarek%20Ben%20El%20Mekki%20CV%20request";
 const cvLabel = "Request CV";
 
 export default function Home() {
-  const cvIsPdf = cvHref.endsWith(".pdf");
-
   return (
     <main id="top">
       <header className="site-header">
@@ -40,13 +39,7 @@ export default function Home() {
             <a href="#contact">Contact</a>
           </nav>
 
-          <a
-            className="nav-cv"
-            href={cvHref}
-            download={cvIsPdf}
-            target={cvIsPdf ? "_blank" : undefined}
-            rel={cvIsPdf ? "noreferrer" : undefined}
-          >
+          <a className="nav-cv" href={cvHref}>
             {cvLabel}
             <Download size={16} aria-hidden="true" />
           </a>
@@ -79,13 +72,7 @@ export default function Home() {
                 <ArrowDown size={18} aria-hidden="true" />
               </a>
 
-              <a
-                className="secondary-action"
-                href={cvHref}
-                download={cvIsPdf}
-                target={cvIsPdf ? "_blank" : undefined}
-                rel={cvIsPdf ? "noreferrer" : undefined}
-              >
+              <a className="secondary-action" href={cvHref}>
                 {cvLabel}
                 <Download size={17} aria-hidden="true" />
               </a>
@@ -133,22 +120,14 @@ export default function Home() {
             </div>
 
             <p>
-              Two connected lines: associative leadership and its technical
-              projects, followed by academic specialization and engineering
-              projects.
+              Two connected paths showing the parallel development of
+              leadership, software, biomedical engineering, embedded systems
+              and robotics.
             </p>
           </div>
-
-          <Timeline
-            title="Associative journey"
-            description="From team contribution to Information Management leadership, supported by increasingly structured digital systems."
-            items={associativeTimeline}
-          />
-
-          <Timeline
-            title="Academic journey"
-            description="From biomedical engineering and autonomous robotics to embedded medical systems and surgical robotics."
-            items={academicTimeline}
+          <JourneyChart
+            associativeItems={associativeTimeline}
+            academicItems={academicTimeline}
           />
         </section>
 
@@ -160,16 +139,12 @@ export default function Home() {
             </div>
 
             <p>
-              Systems demonstrating robotics, embedded engineering, automation
-              and software development.
+              Four multidisciplinary projects presented as an interactive
+              carousel. Drag, use the arrows or select a project card.
             </p>
           </div>
 
-          <div className="projects-grid">
-            {projects.map((project) => (
-              <ProjectCard key={project.title} project={project} />
-            ))}
-          </div>
+          <ProjectCarousel projects={projects} />
         </section>
 
         <section className="section" id="skills">
@@ -180,15 +155,19 @@ export default function Home() {
             </div>
 
             <p>
-              A multidisciplinary toolkit developed through academic,
-              associative and personal engineering projects.
+              Skills organized into clear engineering classes, with each class
+              displayed as one horizontal capability card.
             </p>
           </div>
 
-          <div className="skills-grid">
-            {skillGroups.map((group) => (
-              <article className="skill-group" key={group.title}>
-                <h3>{group.title}</h3>
+          <div className="skills-rows">
+            {skillGroups.map((group, index) => (
+              <article className="skill-row-card" key={group.title}>
+                <div className="skill-row-heading">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <h3>{group.title}</h3>
+                </div>
+
                 <ul>
                   {group.skills.map((skill) => (
                     <li key={skill}>{skill}</li>
@@ -245,12 +224,7 @@ export default function Home() {
               <ArrowUpRight size={16} aria-hidden="true" />
             </a>
 
-            <a
-              href={cvHref}
-              download={cvIsPdf}
-              target={cvIsPdf ? "_blank" : undefined}
-              rel={cvIsPdf ? "noreferrer" : undefined}
-            >
+            <a href={cvHref}>
               <Download size={18} aria-hidden="true" />
               <span>{cvLabel}</span>
               <ArrowUpRight size={16} aria-hidden="true" />
@@ -259,11 +233,10 @@ export default function Home() {
         </section>
 
         <footer>
-          <span>Ã‚Â© 2026 Tarek Ben El Mekki</span>
+          <span>© 2026 Tarek Ben El Mekki</span>
           <span>Designed and developed with Next.js</span>
         </footer>
       </div>
     </main>
   );
 }
-

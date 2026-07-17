@@ -1,4 +1,5 @@
 export type TimelineItem = {
+  period: string;
   label: string;
   title: string;
   description: string;
@@ -17,76 +18,86 @@ export type PortfolioProject = {
 
 export const associativeTimeline: TimelineItem[] = [
   {
+    period: "Foundation",
     label: "Role",
     title: "Team Member",
     description:
-      "Joined Information Management and worked on operational data, internal tools and process improvement.",
+      "Joined Information Management and contributed to operational data, internal tools and process improvement.",
     technologies: ["Information Management", "Data"],
   },
   {
-    label: "Project",
+    period: "Automation",
+    label: "Technical Project",
     title: "Automation & Data System",
     description:
-      "Built dashboards, analytics, workspaces, forms, email automations and API-based data gathering with Google Sheets and Apps Script.",
+      "Built dashboards, analytics, workspaces, forms, automated emails and API-based data collection.",
     technologies: ["Google Sheets", "Apps Script", "APIs"],
   },
   {
-    label: "Project",
+    period: "Web",
+    label: "Technical Project",
     title: "Promotional Web Platforms",
     description:
-      "Developed frontend-focused promotional and conference websites, including the AIESEC 2030 Vision website.",
-    technologies: ["Web", "JavaScript", "Frontend"],
+      "Developed promotional and conference websites, including the AIESEC 2030 Vision platform.",
+    technologies: ["JavaScript", "Frontend", "Web"],
   },
   {
+    period: "Leadership",
     label: "Role",
     title: "Team Leader",
     description:
-      "Coordinated digital initiatives, supported the team and managed delivery of internal information systems.",
+      "Coordinated digital initiatives, supported team members and managed delivery of internal systems.",
     technologies: ["Leadership", "Delivery"],
   },
   {
-    label: "Project",
+    period: "ERP",
+    label: "Technical Project",
     title: "Internal ERP Platform",
     description:
-      "Worked on a custom ERP designed to replace the previous spreadsheet-based operational system.",
+      "Developed a structured ERP platform to replace the previous spreadsheet-based operational system.",
     technologies: ["ERP", "Workflows", "Data"],
   },
   {
+    period: "Executive",
     label: "Role",
     title: "Vice President",
     description:
-      "Led Information Management activities covering automation, internal tools creation and organizational data management.",
+      "Led Information Management, automation, internal tools and organizational data management.",
     technologies: ["Strategy", "Automation"],
   },
 ];
 
 export const academicTimeline: TimelineItem[] = [
   {
+    period: "Licence",
     label: "Degree",
     title: "Biomedical Engineering",
     description:
-      "Licence in Biomedical Engineering, specialization in Medical Informatics, completed at ISTMT.",
+      "Licence in Biomedical Engineering with a specialization in Medical Informatics at ISTMT.",
     technologies: ["Biomedical", "Medical Informatics"],
   },
   {
+    period: "Licence PFE",
     label: "Academic Project",
     title: "Autonomous Navigation Robot",
     description:
-      "Developed an autonomous robot using ROS1, SLAM and A* path planning for mapping, localization and navigation.",
+      "Created an autonomous robot using ROS1, SLAM and A* path planning for mapping and navigation.",
     technologies: ["ROS1", "SLAM", "A*"],
   },
   {
+    period: "Mastère",
     label: "Degree",
     title: "Embedded Systems & Medical Equipment",
     description:
-      "Professional Master's degree, specialization in Medical Information Processing, completed at ISTMT.",
+      "Professional Mastère focused on embedded systems, medical equipment and medical information processing.",
     technologies: ["Embedded Systems", "Medical Equipment"],
   },
   {
+    period: "Mémoire",
     label: "Master's Thesis",
     title: "Teleoperated Surgical Robotic Instrument",
     description:
-      "Designed a ROS2-based surgical robotic instrument integrating embedded control, force sensing, camera feedback and mechatronics.",
+      "Designed a ROS2 surgical robotic instrument integrating control, sensing, camera feedback and mechatronics.",
     technologies: ["ROS2", "Raspberry Pi", "SolidWorks"],
   },
 ];
@@ -97,7 +108,7 @@ export const projects: PortfolioProject[] = [
     category: "Medical Robotics",
     status: "Master's Thesis",
     description:
-      "A multidisciplinary surgical robotics demonstrator combining ROS2, MoveIt, Raspberry Pi control, force sensing, camera feedback and a cable-driven mechanical instrument.",
+      "A surgical robotics demonstrator combining ROS2, MoveIt, Raspberry Pi control, force sensing, camera feedback and a cable-driven mechanical instrument.",
     image: "/project-surgical.svg",
     technologies: [
       "ROS2",
@@ -115,7 +126,7 @@ export const projects: PortfolioProject[] = [
     category: "Robotics",
     status: "Licence Project",
     description:
-      "An autonomous mobile robot using ROS1, SLAM and A* path planning for mapping, localization and autonomous navigation.",
+      "An autonomous mobile robot using ROS1, SLAM and A* path planning for mapping, localization and navigation.",
     image: "/project-autonomous.svg",
     technologies: ["ROS1", "SLAM", "A*", "Python"],
   },
@@ -126,22 +137,32 @@ export const projects: PortfolioProject[] = [
     description:
       "An internal operational ecosystem with dashboards, analytics, forms, workspaces, email automation and API-based data gathering.",
     image: "/project-automation.svg",
-    technologies: ["Google Apps Script", "Google Sheets", "APIs", "Dashboards"],
+    technologies: [
+      "Google Apps Script",
+      "Google Sheets",
+      "APIs",
+      "Dashboards",
+    ],
   },
   {
     title: "Internal ERP Platform",
     category: "Software Systems",
     status: "Completed",
     description:
-      "A custom platform developed to move operations from spreadsheet-based workflows to a structured ERP environment.",
+      "A custom platform developed to move operations from spreadsheet workflows to a structured ERP environment.",
     image: "/project-erp.svg",
-    technologies: ["ERP", "Workflows", "Data Management", "Software Systems"],
+    technologies: [
+      "ERP",
+      "Workflows",
+      "Data Management",
+      "Software Systems",
+    ],
   },
 ];
 
 export const skillGroups = [
   {
-    title: "Robotics & ROS",
+    title: "Robotics & Motion Control",
     skills: [
       "ROS2 Humble",
       "ROS1",
@@ -154,7 +175,7 @@ export const skillGroups = [
     ],
   },
   {
-    title: "Embedded Systems",
+    title: "Embedded Systems & Electronics",
     skills: [
       "Raspberry Pi",
       "GPIO",
@@ -167,8 +188,17 @@ export const skillGroups = [
     ],
   },
   {
-    title: "Programming",
-    skills: ["Python", "C/C++", "Java", "R", "JavaScript", "TypeScript"],
+    title: "Programming & Software",
+    skills: [
+      "Python",
+      "C/C++",
+      "Java",
+      "R",
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Next.js",
+    ],
   },
   {
     title: "Biomedical & MedTech",
@@ -182,7 +212,7 @@ export const skillGroups = [
     ],
   },
   {
-    title: "Engineering",
+    title: "Simulation & Prototyping",
     skills: [
       "SolidWorks",
       "MATLAB",
@@ -190,16 +220,17 @@ export const skillGroups = [
       "Qt",
       "Mechatronics",
       "Mechanical Prototyping",
+      "CAD",
+      "System Integration",
     ],
   },
   {
-    title: "Automation & Software",
+    title: "Automation, Data & Platforms",
     skills: [
       "Google Apps Script",
       "Workflow Automation",
       "Dashboards",
       "REST APIs",
-      "React",
       "PostgreSQL",
       "Git",
       "Docker",

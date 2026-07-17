@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+/reviews/
+/backups/
+/logs/
+/temp/
+/exports/
+/codebase_snapshot.txt
+/tree_snapshot.txt
+/PROJECT_SNAPSHOT.txt
+/project_tree.txt
+/hero_source.txt
+/v0-portfolio-context.zip
