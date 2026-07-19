@@ -404,6 +404,122 @@ async function openReviewPackage(zipCreated) {
   explorer.unref();
 }
 
+async function captureReviewScreenshot(
+  page,
+  outputPath,
+  {
+    fullPage = false,
+    segmentPrefix = "capture",
+  } = {},
+) {
+  try {
+    await page.screenshot({
+      path: outputPath,
+      fullPage,
+      animations: "disabled",
+      caret: "hide",
+      timeout: 30_000,
+    });
+
+    return [path.basename(outputPath)];
+  } catch (error) {
+    if (!fullPage) {
+      throw error;
+    }
+
+    console.warn(
+      `Full-page screenshot failed for ${segmentPrefix}. Falling back to segmented capture.`,
+    );
+
+    console.warn(
+      error instanceof Error
+        ? error.message
+        : String(error),
+    );
+
+    const viewport = page.viewportSize();
+
+    if (!viewport) {
+      throw error;
+    }
+
+    const pageHeight = await page.evaluate(() =>
+      Math.max(
+        document.documentElement.scrollHeight,
+        document.body.scrollHeight,
+      ),
+    );
+
+    const originalScrollY = await page.evaluate(
+      () => window.scrollY,
+    );
+
+    const capturedFiles = [];
+
+    let partNumber = 1;
+
+    for (
+      let scrollY = 0;
+      scrollY < pageHeight;
+      scrollY += viewport.height
+    ) {
+      await page.evaluate((targetY) => {
+        window.scrollTo({
+          top: targetY,
+          behavior: "instant",
+        });
+      }, scrollY);
+
+      await page.waitForTimeout(180);
+
+      const partFilename =
+        partNumber === 1
+          ? path.basename(outputPath)
+          : `${segmentPrefix}-part-${String(
+              partNumber,
+            ).padStart(2, "0")}.png`;
+
+      const partPath =
+        partNumber === 1
+          ? outputPath
+          : path.join(
+              path.dirname(outputPath),
+              partFilename,
+            );
+
+      await page.screenshot({
+        path: partPath,
+        fullPage: false,
+        animations: "disabled",
+        caret: "hide",
+        timeout: 30_000,
+      });
+
+      capturedFiles.push(partFilename);
+
+      console.log(
+        `Captured ${partFilename} (${Math.min(
+          scrollY + viewport.height,
+          pageHeight,
+        )}/${pageHeight}px)`,
+      );
+
+      partNumber += 1;
+    }
+
+    await page.evaluate((targetY) => {
+      window.scrollTo({
+        top: targetY,
+        behavior: "instant",
+      });
+    }, originalScrollY);
+
+    await page.waitForTimeout(150);
+
+    return capturedFiles;
+  }
+}
+
 try {
   console.log("");
   console.log("==============================================");
@@ -646,12 +762,15 @@ try {
       `${viewport.name}.png`,
     );
 
-    await page.screenshot({
-      path: screenshotPath,
-      fullPage: true,
-      animations: "disabled",
-      caret: "hide",
-    });
+    const capturedPageFiles =
+      await captureReviewScreenshot(
+        page,
+        screenshotPath,
+        {
+          fullPage: true,
+          segmentPrefix: viewport.name,
+        },
+      );
 
     screenshotMetadata.push({
       viewport: viewport.name,
@@ -661,9 +780,66 @@ try {
       pageHeight: dimensions.height,
       title: dimensions.title,
       screenshot: `${viewport.name}.png`,
+      screenshotFiles: capturedPageFiles,
+      segmented: capturedPageFiles.length > 1,
     });
 
     console.log(`Captured ${viewport.name}.png`);
+
+    if (
+      viewport.name === "desktop" ||
+      viewport.name === "mobile"
+    ) {
+      const activeProjectCard = page.locator(
+        ".project-carousel-card.is-active",
+      );
+
+      if ((await activeProjectCard.count()) > 0) {
+        await activeProjectCard.scrollIntoViewIfNeeded();
+        await activeProjectCard.click();
+
+        const projectModal = page.locator(".project-modal");
+
+        await projectModal.waitFor({
+          state: "visible",
+          timeout: 10_000,
+        });
+
+        await page.waitForTimeout(350);
+
+        const modalScreenshotName =
+          `project-modal-${viewport.name}.png`;
+
+        await page.screenshot({
+          path: path.join(
+            reviewDirectory,
+            modalScreenshotName,
+          ),
+          fullPage: false,
+          animations: "disabled",
+          caret: "hide",
+        });
+
+        screenshotMetadata.push({
+          viewport: `${viewport.name}-project-modal`,
+          viewportWidth: viewport.width,
+          viewportHeight: viewport.height,
+          pageWidth: viewport.width,
+          pageHeight: viewport.height,
+          title: dimensions.title,
+          screenshot: modalScreenshotName,
+        });
+
+        console.log(`Captured ${modalScreenshotName}`);
+
+        await page.locator(".project-modal-close").click();
+
+        await projectModal.waitFor({
+          state: "hidden",
+          timeout: 10_000,
+        });
+      }
+    }
 
     await context.close();
   }
@@ -755,6 +931,8 @@ try {
           "desktop.png",
           "tablet.png",
           "mobile.png",
+          "project-modal-desktop.png",
+          "project-modal-mobile.png",
           "codebase.txt",
           "tree.txt",
           "git-status.txt",

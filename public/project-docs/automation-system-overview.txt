@@ -1,0 +1,19 @@
+OPERATIONAL AUTOMATION AND DATA SYSTEM
+PROJECT OVERVIEW
+
+OBJECTIVE
+Reduce repetitive manual work and centralize operational information using
+accessible Google Workspace technologies.
+
+SYSTEM ELEMENTS
+- Structured Google Sheets data
+- Google Forms data collection
+- Google Apps Script automation
+- Automated emails
+- Dashboards and analytics
+- API-based data gathering
+- Internal team workspaces
+
+RESULT
+A connected operational system that improved data visibility, reduced repeated
+manual actions and created a foundation for a later dedicated ERP platform.

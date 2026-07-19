@@ -1,0 +1,24 @@
+AUTONOMOUS NAVIGATION ROBOT
+PROJECT BRIEF
+
+OBJECTIVE
+Develop a mobile robot capable of mapping an unknown environment and navigating
+autonomously toward a target.
+
+CORE TECHNOLOGIES
+- ROS1
+- SLAM
+- A* path planning
+- Python and C++
+- Sensor-driven mobile robotics
+
+PIPELINE
+1. Acquire environmental data.
+2. Construct and update the map.
+3. Estimate the robot position.
+4. Generate a path toward the target.
+5. Execute and validate robot movement.
+
+MAIN CONTRIBUTIONS
+ROS node development, SLAM configuration, A* planning, navigation integration,
+debugging and physical testing.

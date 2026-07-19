@@ -1,0 +1,35 @@
+PROMOTIONAL WEB PLATFORMS
+PROJECT OVERVIEW
+
+CONTEXT
+
+A collection of promotional and event-focused digital platforms developed
+during my associative experience in AIESEC.
+
+OBJECTIVE
+
+Create modern web experiences supporting organizational communication,
+events and strategic initiatives while providing clear information and
+strong visual presentation.
+
+SELECTED WORK
+
+- AIESEC 2030 Vision promotional website
+- Conference and event websites
+- Frontend-focused promotional experiences
+- Lightweight backend functionality where required
+
+MAIN CONTRIBUTIONS
+
+- Interface design and implementation
+- Responsive frontend development
+- Content architecture
+- Digital communication structure
+- Event-focused user experience
+- Deployment and iterative improvement
+
+ENGINEERING VALUE
+
+These projects were an early bridge between organizational needs and
+software development. They helped establish the frontend and web-development
+foundation that later supported more complex automation and ERP systems.

@@ -1,8 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import {
+  ArrowLeft,
+  ArrowRight,
+  Maximize2,
+} from "lucide-react";
+import {
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -11,6 +16,9 @@ import {
   type PointerEvent,
 } from "react";
 
+import { ProjectModal } from "@/components/ProjectModal";
+import { PromotionalFullscreenModal } from "@/components/PromotionalFullscreenModal";
+import { SheetsFullscreenModal } from "@/components/SheetsFullscreenModal";
 import type { PortfolioProject } from "@/data/portfolio";
 
 type ProjectCarouselProps = {
@@ -45,7 +53,70 @@ function getRelativePosition(
 export function ProjectCarousel({ projects }: ProjectCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [selectedProject, setSelectedProject] =
+    useState<PortfolioProject | null>(null);
+
+  const [
+    erpPreviewFrame,
+    setErpPreviewFrame,
+  ] =
+    useState(0);
+
   const dragStart = useRef<number | null>(null);
+
+  useEffect(() => {
+    const handleJourneyProjectOpen = (
+      event: Event,
+    ) => {
+      const customEvent =
+        event as CustomEvent<{
+          slug?: string;
+        }>;
+
+      const slug =
+        customEvent.detail?.slug;
+
+      if (!slug) {
+        return;
+      }
+
+      const projectIndex =
+        projects.findIndex(
+          (project) =>
+            project.slug === slug,
+        );
+
+      if (projectIndex < 0) {
+        return;
+      }
+
+      const project =
+        projects[projectIndex];
+
+      setActiveIndex(
+        projectIndex,
+      );
+
+      setSelectedProject(
+        project,
+      );
+
+      setPaused(true);
+    };
+
+    window.addEventListener(
+      "portfolio:open-project",
+      handleJourneyProjectOpen,
+    );
+
+    return () => {
+      window.removeEventListener(
+        "portfolio:open-project",
+        handleJourneyProjectOpen,
+      );
+    };
+  }, [projects]);
+  const suppressClick = useRef(false);
 
   const showPrevious = () => {
     setActiveIndex((current) =>
@@ -57,8 +128,92 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
     setActiveIndex((current) => (current + 1) % projects.length);
   };
 
+  /*
+    ERP_PREVIEW_AUTOPLAY
+
+    The main ERP card automatically rotates through
+    the real interface screenshots while the ERP
+    project is active.
+
+    This is independent from the outer project carousel.
+  */
+
   useEffect(() => {
-    if (paused || projects.length < 2) {
+
+    const activeProject =
+      projects[activeIndex];
+
+    if (
+      !activeProject ||
+      activeProject.slug !==
+        "internal-erp-platform" ||
+      selectedProject !== null
+    ) {
+
+      return;
+    }
+
+
+    const previewImages =
+      activeProject.media.filter(
+        (media) =>
+          media.kind === "image" &&
+          media.src.startsWith(
+            "/project-erp/erp-interface-",
+          ),
+      );
+
+
+    if (
+      previewImages.length < 2
+    ) {
+
+      return;
+    }
+
+
+    const timer =
+      window.setInterval(
+        () => {
+
+          setErpPreviewFrame(
+            (current) =>
+              (
+                current +
+                1
+              ) %
+              previewImages.length,
+          );
+
+        },
+        2600,
+      );
+
+
+    return () => {
+
+      window.clearInterval(
+        timer,
+      );
+
+    };
+
+  }, [
+    activeIndex,
+    projects,
+    selectedProject,
+  ]);
+
+  const closeProject = useCallback(() => {
+    setSelectedProject(null);
+  }, []);
+
+  useEffect(() => {
+    if (
+      paused ||
+      selectedProject !== null ||
+      projects.length < 2
+    ) {
       return;
     }
 
@@ -71,7 +226,7 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
     return () => {
       window.clearInterval(timer);
     };
-  }, [paused, projects.length]);
+  }, [paused, projects.length, selectedProject]);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "ArrowLeft") {
@@ -87,7 +242,7 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
 
   const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
     dragStart.current = event.clientX;
-    event.currentTarget.setPointerCapture(event.pointerId);
+    suppressClick.current = false;
   };
 
   const handlePointerUp = (event: PointerEvent<HTMLDivElement>) => {
@@ -96,7 +251,9 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
     }
 
     const distance = event.clientX - dragStart.current;
+
     dragStart.current = null;
+    suppressClick.current = Math.abs(distance) > 12;
 
     if (distance > 55) {
       showPrevious();
@@ -105,6 +262,24 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
     if (distance < -55) {
       showNext();
     }
+  };
+
+  const handleProjectClick = (
+    project: PortfolioProject,
+    index: number,
+    isActive: boolean,
+  ) => {
+    if (suppressClick.current) {
+      suppressClick.current = false;
+      return;
+    }
+
+    if (!isActive) {
+      setActiveIndex(index);
+      return;
+    }
+
+    setSelectedProject(project);
   };
 
   return (
@@ -124,6 +299,7 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
         onPointerUp={handlePointerUp}
         onPointerCancel={() => {
           dragStart.current = null;
+          suppressClick.current = false;
         }}
       >
         {projects.map((project, index) => {
@@ -136,6 +312,39 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
           const distance = Math.abs(position);
           const isActive = position === 0;
 
+          const erpPreviewImages =
+            project.slug ===
+            "internal-erp-platform"
+              ? project.media.filter(
+                  (media) =>
+                    media.kind ===
+                      "image" &&
+                    media.src.startsWith(
+                      "/project-erp/erp-interface-",
+                    ),
+                )
+              : [];
+
+
+          const carouselPreviewImage =
+            project.slug ===
+              "internal-erp-platform" &&
+            erpPreviewImages.length > 0
+
+              ? (
+                  isActive
+
+                    ? erpPreviewImages[
+                        erpPreviewFrame %
+                          erpPreviewImages.length
+                      ]?.src
+
+                    : erpPreviewImages[0]?.src
+                ) ||
+                project.image
+
+              : project.image;
+
           const style = {
             "--carousel-x": `${position * 72}%`,
             "--carousel-y": `${distance * 17}px`,
@@ -147,6 +356,10 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
             "--project-accent": accents[index % accents.length],
           } as CSSProperties;
 
+          const actionLabel = isActive
+            ? `Open full case study for ${project.title}`
+            : `Bring ${project.title} into focus`;
+
           return (
             <button
               type="button"
@@ -154,14 +367,20 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
                 isActive ? "is-active" : ""
               }`}
               style={style}
-              key={project.title}
-              onClick={() => setActiveIndex(index)}
-              aria-label={`Show project ${index + 1}: ${project.title}`}
+              key={project.slug}
+              onClick={() =>
+                handleProjectClick(project, index, isActive)
+              }
+              aria-label={actionLabel}
               aria-current={isActive ? "true" : undefined}
+              data-project-slug={project.slug}
+              data-project-active={isActive ? "true" : "false"}
             >
               <div className="project-carousel-visual">
                 <Image
-                  src={project.image}
+                  key={carouselPreviewImage}
+                  className="project-carousel-preview-image"
+                  src={carouselPreviewImage}
                   alt=""
                   fill
                   sizes="(max-width: 760px) 82vw, 430px"
@@ -186,6 +405,11 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
                     <span key={technology}>{technology}</span>
                   ))}
                 </div>
+
+                <span className="project-carousel-open">
+                  View full case study
+                  <Maximize2 size={15} aria-hidden="true" />
+                </span>
               </div>
             </button>
           );
@@ -205,7 +429,7 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
           {projects.map((project, index) => (
             <button
               type="button"
-              key={project.title}
+              key={project.slug}
               className={index === activeIndex ? "is-active" : ""}
               onClick={() => setActiveIndex(index)}
               aria-label={`Show ${project.title}`}
@@ -227,6 +451,39 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
           <ArrowRight size={19} aria-hidden="true" />
         </button>
       </div>
+
+      {selectedProject ? (
+
+        selectedProject.slug ===
+        "operational-automation-system" ? (
+
+          <SheetsFullscreenModal
+            project={selectedProject}
+            onClose={closeProject}
+          />
+
+        ) : (
+
+          selectedProject.slug ===
+          "promotional-web-platforms" ? (
+
+            <PromotionalFullscreenModal
+              project={selectedProject}
+              onClose={closeProject}
+            />
+
+          ) : (
+
+            <ProjectModal
+              project={selectedProject}
+              onClose={closeProject}
+            />
+
+          )
+
+        )
+
+      ) : null}
     </div>
   );
 }

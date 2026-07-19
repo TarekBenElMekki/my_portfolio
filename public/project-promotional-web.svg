@@ -1,0 +1,135 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="1200"
+  height="760"
+  viewBox="0 0 1200 760"
+>
+  <rect width="1200" height="760" fill="#08090b"/>
+
+  <g opacity=".24" stroke="#4d86ff">
+    <path d="M0 120H1200"/>
+    <path d="M0 240H1200"/>
+    <path d="M0 360H1200"/>
+    <path d="M0 480H1200"/>
+    <path d="M0 600H1200"/>
+
+    <path d="M160 0V760"/>
+    <path d="M360 0V760"/>
+    <path d="M560 0V760"/>
+    <path d="M760 0V760"/>
+    <path d="M960 0V760"/>
+  </g>
+
+  <rect
+    x="155"
+    y="115"
+    width="890"
+    height="520"
+    rx="20"
+    fill="#0d0f14"
+    stroke="#334a72"
+  />
+
+  <rect
+    x="185"
+    y="148"
+    width="830"
+    height="48"
+    rx="9"
+    fill="#121722"
+  />
+
+  <circle cx="215" cy="172" r="6" fill="#4d86ff"/>
+  <circle cx="237" cy="172" r="6" fill="#39445a"/>
+  <circle cx="259" cy="172" r="6" fill="#39445a"/>
+
+  <rect
+    x="205"
+    y="235"
+    width="375"
+    height="245"
+    rx="12"
+    fill="#10141d"
+    stroke="#243653"
+  />
+
+  <text
+    x="235"
+    y="295"
+    fill="#4d86ff"
+    font-family="Arial, sans-serif"
+    font-size="17"
+    letter-spacing="4"
+  >
+    DIGITAL EXPERIENCE
+  </text>
+
+  <text
+    x="235"
+    y="360"
+    fill="#f2f4f8"
+    font-family="Arial, sans-serif"
+    font-size="42"
+  >
+    Promotional
+  </text>
+
+  <text
+    x="235"
+    y="410"
+    fill="#f2f4f8"
+    font-family="Arial, sans-serif"
+    font-size="42"
+  >
+    Web Platforms
+  </text>
+
+  <rect
+    x="625"
+    y="235"
+    width="360"
+    height="118"
+    rx="12"
+    fill="#111827"
+    stroke="#2c4266"
+  />
+
+  <rect
+    x="625"
+    y="375"
+    width="170"
+    height="105"
+    rx="12"
+    fill="#111827"
+    stroke="#2c4266"
+  />
+
+  <rect
+    x="815"
+    y="375"
+    width="170"
+    height="105"
+    rx="12"
+    fill="#111827"
+    stroke="#2c4266"
+  />
+
+  <path
+    d="M205 545H985"
+    stroke="#4d86ff"
+    stroke-width="2"
+    stroke-dasharray="5 9"
+    opacity=".72"
+  />
+
+  <text
+    x="205"
+    y="590"
+    fill="#8793a7"
+    font-family="Arial, sans-serif"
+    font-size="17"
+    letter-spacing="3"
+  >
+    WEB · FRONTEND · DIGITAL COMMUNICATION
+  </text>
+</svg>

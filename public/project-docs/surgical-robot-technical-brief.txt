@@ -1,0 +1,32 @@
+ROS2 TELEOPERATED SURGICAL ROBOTIC INSTRUMENT
+TECHNICAL PROJECT BRIEF
+
+PROJECT TYPE
+Professional Master's thesis project.
+
+OBJECTIVE
+Design and prototype a teleoperated surgical instrument combining mechanical
+articulation, ROS2 control, camera feedback, force sensing and safety logic.
+
+SOFTWARE ARCHITECTURE
+- ROS2 Humble
+- MoveIt and RViz on the computer
+- Raspberry Pi hardware-control layer
+- FollowJointTrajectory-compatible execution
+- Camera and force-sensor topics
+
+HARDWARE
+- Raspberry Pi 4B
+- Three servo motors
+- Cable-and-pulley mechanical transmission
+- FSR force sensor
+- MCP3202 analog-to-digital converter
+- OV5647 camera
+
+SAFETY
+The system warns before excessive force and blocks additional jaw closing when
+the configured safety threshold is reached. Opening remains available.
+
+MAIN CONTRIBUTIONS
+Mechanical design, ROS2 integration, motion control, embedded programming,
+sensor acquisition, camera integration and system testing.

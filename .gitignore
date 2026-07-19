@@ -50,3 +50,8 @@ next-env.d.ts
 /project_tree.txt
 /hero_source.txt
 /v0-portfolio-context.zip
+.env.local
+.env.local
+.env*.local
+backups/
+reviews/

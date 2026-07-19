@@ -1,0 +1,365 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1600 900"
+  role="img"
+  aria-labelledby="title desc"
+>
+  <title id="title">
+    Google Sheets automation project banner
+  </title>
+
+  <desc id="desc">
+    Minimal dark engineering-style banner representing
+    Google Sheets, automation and operational data systems.
+  </desc>
+
+  <defs>
+    <linearGradient
+      id="background"
+      x1="0"
+      y1="0"
+      x2="1"
+      y2="1"
+    >
+      <stop
+        offset="0"
+        stop-color="#080a09"
+      />
+
+      <stop
+        offset="1"
+        stop-color="#111714"
+      />
+    </linearGradient>
+
+    <linearGradient
+      id="greenGlow"
+      x1="0"
+      y1="0"
+      x2="1"
+      y2="1"
+    >
+      <stop
+        offset="0"
+        stop-color="#34a853"
+      />
+
+      <stop
+        offset="1"
+        stop-color="#188038"
+      />
+    </linearGradient>
+
+    <filter id="glow">
+      <feGaussianBlur
+        stdDeviation="36"
+      />
+    </filter>
+  </defs>
+
+
+  <rect
+    width="1600"
+    height="900"
+    fill="url(#background)"
+  />
+
+
+  <circle
+    cx="1220"
+    cy="310"
+    r="290"
+    fill="#34a853"
+    opacity=".08"
+    filter="url(#glow)"
+  />
+
+
+  <!-- technical grid -->
+
+  <g
+    stroke="#ffffff"
+    stroke-opacity=".035"
+    stroke-width="1"
+  >
+
+    <path
+      d="
+        M0 150 H1600
+        M0 300 H1600
+        M0 450 H1600
+        M0 600 H1600
+        M0 750 H1600
+      "
+    />
+
+    <path
+      d="
+        M200 0 V900
+        M400 0 V900
+        M600 0 V900
+        M800 0 V900
+        M1000 0 V900
+        M1200 0 V900
+        M1400 0 V900
+      "
+    />
+
+  </g>
+
+
+  <!-- sheet document -->
+
+  <g
+    transform="translate(980 185)"
+  >
+
+    <rect
+      x="0"
+      y="0"
+      width="330"
+      height="430"
+      rx="26"
+      fill="url(#greenGlow)"
+    />
+
+
+    <path
+      d="
+        M225 0
+        L330 105
+        H244
+        C233 105 225 97 225 86
+        Z
+      "
+      fill="#ffffff"
+      opacity=".25"
+    />
+
+
+    <rect
+      x="62"
+      y="150"
+      width="205"
+      height="180"
+      rx="5"
+      fill="none"
+      stroke="#ffffff"
+      stroke-width="14"
+    />
+
+
+    <path
+      d="
+        M62 210 H267
+        M62 270 H267
+        M130 150 V330
+        M199 150 V330
+      "
+      fill="none"
+      stroke="#ffffff"
+      stroke-width="10"
+      opacity=".95"
+    />
+
+  </g>
+
+
+  <!-- automation connections -->
+
+  <g
+    fill="none"
+    stroke="#34a853"
+    stroke-width="3"
+    stroke-opacity=".55"
+  >
+
+    <path
+      d="
+        M690 350
+        C780 350 805 300 900 300
+      "
+    />
+
+    <path
+      d="
+        M690 450
+        C800 450 830 450 930 450
+      "
+    />
+
+    <path
+      d="
+        M690 550
+        C780 550 820 600 930 600
+      "
+    />
+
+  </g>
+
+
+  <g fill="#34a853">
+
+    <circle
+      cx="690"
+      cy="350"
+      r="7"
+    />
+
+    <circle
+      cx="690"
+      cy="450"
+      r="7"
+    />
+
+    <circle
+      cx="690"
+      cy="550"
+      r="7"
+    />
+
+    <circle
+      cx="900"
+      cy="300"
+      r="7"
+    />
+
+    <circle
+      cx="930"
+      cy="450"
+      r="7"
+    />
+
+    <circle
+      cx="930"
+      cy="600"
+      r="7"
+    />
+
+  </g>
+
+
+  <!-- typography -->
+
+  <text
+    x="120"
+    y="175"
+    fill="#34a853"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="27"
+    font-weight="700"
+    letter-spacing="5"
+  >
+    OPERATIONAL SYSTEM
+  </text>
+
+
+  <text
+    x="120"
+    y="280"
+    fill="#ffffff"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="76"
+    font-weight="700"
+    letter-spacing="-2"
+  >
+    Sheets &amp;
+  </text>
+
+
+  <text
+    x="120"
+    y="365"
+    fill="#ffffff"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="76"
+    font-weight="700"
+    letter-spacing="-2"
+  >
+    Automation
+  </text>
+
+
+  <text
+    x="120"
+    y="445"
+    fill="#8b9490"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="27"
+  >
+    Data · Workflows · Dashboards · Automation
+  </text>
+
+
+  <g
+    transform="translate(120 610)"
+    font-family="Arial, Helvetica, sans-serif"
+  >
+
+    <rect
+      width="185"
+      height="48"
+      rx="24"
+      fill="#34a853"
+      fill-opacity=".1"
+      stroke="#34a853"
+      stroke-opacity=".25"
+    />
+
+    <text
+      x="92.5"
+      y="31"
+      fill="#72d98b"
+      font-size="17"
+      text-anchor="middle"
+    >
+      GOOGLE SHEETS
+    </text>
+
+
+    <rect
+      x="205"
+      width="175"
+      height="48"
+      rx="24"
+      fill="#ffffff"
+      fill-opacity=".035"
+      stroke="#ffffff"
+      stroke-opacity=".09"
+    />
+
+    <text
+      x="292.5"
+      y="31"
+      fill="#9da49f"
+      font-size="17"
+      text-anchor="middle"
+    >
+      APPS SCRIPT
+    </text>
+
+
+    <rect
+      x="400"
+      width="160"
+      height="48"
+      rx="24"
+      fill="#ffffff"
+      fill-opacity=".035"
+      stroke="#ffffff"
+      stroke-opacity=".09"
+    />
+
+    <text
+      x="480"
+      y="31"
+      fill="#9da49f"
+      font-size="17"
+      text-anchor="middle"
+    >
+      ANALYTICS
+    </text>
+
+  </g>
+
+</svg>

@@ -1,0 +1,19 @@
+INTERNAL ERP PLATFORM
+PROJECT OVERVIEW
+
+OBJECTIVE
+Move growing operational workflows from spreadsheet-based processes into a
+dedicated and maintainable software platform.
+
+CORE AREAS
+- Centralized operational data
+- Administrative dashboards
+- Role-aware access
+- Structured workflow interfaces
+- Reusable application modules
+- Database-backed records
+
+APPROACH
+The platform was organized around actual organizational workflows rather than
+isolated pages. Product requirements, frontend interfaces, backend behavior and
+data organization were developed as one connected system.

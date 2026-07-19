@@ -1,6 +1,5 @@
 import Image from "next/image";
 import {
-  ArrowDown,
   ArrowUpRight,
   Download,
   GitBranch,
@@ -8,6 +7,7 @@ import {
 } from "lucide-react";
 
 import { ProjectCarousel } from "@/components/ProjectCarousel";
+import { TerminalHero } from "@/components/TerminalHero";
 import { JourneyChart } from "@/components/JourneyChart";
 import {
   academicTimeline,
@@ -27,8 +27,38 @@ export default function Home() {
     <main id="top">
       <header className="site-header">
         <div className="container navigation">
-          <a className="brand" href="#top" aria-label="Go to the top">
-            TB<span>.</span>
+          <a
+            className="brand brand-identity"
+            href="#top"
+            aria-label="Tarek Ben El Mekki — go to the top"
+          >
+            <span className="brand-avatar">
+              <Image
+                src={profileAsset}
+                alt=""
+                fill
+                sizes="42px"
+              />
+
+              <span
+                className="brand-availability"
+                aria-hidden="true"
+              />
+            </span>
+
+            <span className="brand-copy">
+              <strong>TBEM<span className="brand-dot">.</span></strong>
+
+              <small>
+                Master Graduate
+                <span aria-hidden="true">·</span>
+                Tunisia
+              </small>
+            </span>
+
+            <span className="brand-short">
+              TBEM<span>.</span>
+            </span>
           </a>
 
           <nav aria-label="Main navigation">
@@ -47,48 +77,10 @@ export default function Home() {
       </header>
 
       <div className="container site-content">
-        <section className="hero">
-          <div className="hero-copy">
-            <span className="eyebrow">Tarek Ben El Mekki</span>
-
-            <h1>
-              Building robotic, embedded and software systems
-              <span>.</span>
-            </h1>
-
-            <p className="hero-role">
-              Biomedical &amp; Embedded Systems Engineer
-            </p>
-
-            <p className="hero-description">
-              I connect robotics, medical technology, embedded control,
-              automation and software to turn multidisciplinary engineering
-              challenges into practical working systems.
-            </p>
-
-            <div className="hero-actions">
-              <a className="primary-action" href="#projects">
-                View selected work
-                <ArrowDown size={18} aria-hidden="true" />
-              </a>
-
-              <a className="secondary-action" href={cvHref}>
-                {cvLabel}
-                <Download size={17} aria-hidden="true" />
-              </a>
-            </div>
-          </div>
-
-          <div className="portrait-frame">
-            <Image
-              src={profileAsset}
-              alt="Portrait of Tarek Ben El Mekki"
-              fill
-              priority
-              sizes="(max-width: 760px) 100vw, 42vw"
-            />
-          </div>
-        </section>
+        <TerminalHero
+          cvHref={cvHref}
+          cvLabel={cvLabel}
+        />
 
         <section className="section about-section" id="about">
           <div className="section-index">
@@ -98,7 +90,7 @@ export default function Home() {
 
           <div className="about-copy">
             <p className="large-copy">
-              I am a biomedical and embedded systems engineer with a foundation
+              I am a biomedical and embedded systems Master Graduate with a foundation
               in medical informatics and medical information processing.
             </p>
 
@@ -139,8 +131,8 @@ export default function Home() {
             </div>
 
             <p>
-              Four multidisciplinary projects presented as an interactive
-              carousel. Drag, use the arrows or select a project card.
+              Select a project and open the active card to explore the complete
+              case study, media gallery, technical details and documents.
             </p>
           </div>
 
@@ -233,8 +225,8 @@ export default function Home() {
         </section>
 
         <footer>
-          <span>© 2026 Tarek Ben El Mekki</span>
-          <span>Designed and developed with Next.js</span>
+          <span>© 2026 All copyrights reserved</span>
+          <span>Designed and developed by Tarek Ben El Mekki</span>
         </footer>
       </div>
     </main>
