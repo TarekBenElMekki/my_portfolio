@@ -89,18 +89,24 @@ export default function Home() {
           </div>
 
           <div className="about-copy">
-            <p className="large-copy">
-              I am a biomedical and embedded systems Master Graduate with a foundation
-              in medical informatics and medical information processing.
+
+            <p className="about-profile-copy">
+
+              <strong className="about-profile-lead">
+                Fresh graduate with a Licence in Biomedical Engineering and a
+                Professional Master&apos;s in Embedded Systems and Medical
+                Equipment
+              </strong>
+
+              <span className="about-profile-detail">
+                , specializing in medical information processing and medical
+                informatics. Proficient in electronics, robotics, mechanical
+                design, and software development, with hands-on experience in
+                embedded systems and automation.
+              </span>
+
             </p>
 
-            <p>
-              My work spans autonomous navigation with ROS1, surgical robotics
-              with ROS2, embedded actuator control, force sensing, automation,
-              internal tools and software systems. I enjoy understanding the
-              complete system, from the physical mechanism and electronics to
-              the control architecture and user-facing software.
-            </p>
           </div>
         </section>
 

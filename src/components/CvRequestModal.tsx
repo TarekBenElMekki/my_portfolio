@@ -9,46 +9,79 @@ import {
 } from "react";
 
 
+type CvLanguage =
+  "en" |
+  "fr";
+
+
 type RequestState =
-  | "idle"
-  | "sending"
-  | "success"
-  | "error";
+  "idle" |
+  "sending" |
+  "success" |
+  "error";
 
 
-const GMAIL_INBOX_URL =
-  "https://mail.google.com/mail/u/0/#inbox";
+const languages = [
 
-const GMAIL_SPAM_URL =
-  "https://mail.google.com/mail/u/0/#spam";
+  {
+    value:
+      "en" as const,
+
+    title:
+      "English",
+
+    subtitle:
+      "CV · English version",
+
+  },
+
+  {
+    value:
+      "fr" as const,
+
+    title:
+      "Français",
+
+    subtitle:
+      "CV · Version française",
+
+  },
+
+];
 
 
 export function CvRequestModal() {
 
   const [
-    isOpen,
-    setIsOpen,
+    open,
+    setOpen,
   ] =
-    useState(false);
+    useState(
+      false,
+    );
 
 
   const [
     email,
     setEmail,
   ] =
-    useState("");
+    useState(
+      "",
+    );
 
 
   const [
-    website,
-    setWebsite,
+    language,
+    setLanguage,
   ] =
-    useState("");
+    useState<CvLanguage>(
+      "en",
+    );
 
 
   const [
-    requestState,
-    setRequestState,
+    status,
+    setStatus,
   ] =
     useState<RequestState>(
       "idle",
@@ -59,7 +92,18 @@ export function CvRequestModal() {
     message,
     setMessage,
   ] =
-    useState("");
+    useState(
+      "",
+    );
+
+
+  const [
+    animationStep,
+    setAnimationStep,
+  ] =
+    useState(
+      0,
+    );
 
 
   const inputRef =
@@ -68,155 +112,138 @@ export function CvRequestModal() {
     );
 
 
+  const openModal =
+    useCallback(
+      () => {
+
+        setStatus(
+          "idle",
+        );
+
+        setMessage(
+          "",
+        );
+
+        setAnimationStep(
+          0,
+        );
+
+        setOpen(
+          true,
+        );
+
+      },
+      [],
+    );
+
+
   const closeModal =
     useCallback(
       () => {
 
         if (
-          requestState ===
+          status !==
           "sending"
         ) {
 
-          return;
+          setOpen(
+            false,
+          );
+
         }
-
-
-        setIsOpen(
-          false,
-        );
-
-
-        window.setTimeout(
-          () => {
-
-            setRequestState(
-              "idle",
-            );
-
-            setMessage("");
-
-          },
-          180,
-        );
 
       },
       [
-        requestState,
+        status,
       ],
     );
 
 
-  /*
-    Any visible "Request CV" link/button
-    opens this modal.
-  */
-
   useEffect(
     () => {
 
-      const handleRequestClick = (
-        event: MouseEvent,
-      ) => {
+      const handler =
+        (
+          event:
+            MouseEvent,
+        ) => {
 
-        const target =
-          event.target;
-
-
-        if (
-          !(
-            target instanceof
-            Element
-          )
-        ) {
-
-          return;
-        }
-
-
-        const trigger =
-          target.closest(
-            "a, button",
-          );
-
-
-        if (
-          !trigger
-        ) {
-
-          return;
-        }
-
-
-        const text =
-          trigger.textContent
-            ?.replace(
-              /\s+/g,
-              " ",
+          if (
+            !(
+              event.target
+              instanceof
+              Element
             )
-            .trim()
-            .toLowerCase();
+          ) {
+
+            return;
+
+          }
 
 
-        if (
-          text !==
-          "request cv"
-        ) {
-
-          return;
-        }
+          const trigger =
+            event.target.closest(
+              "a, button",
+            );
 
 
-        event.preventDefault();
+          const text =
+            trigger
+              ?.textContent
+              ?.replace(
+                /\s+/g,
+                " ",
+              )
+              .trim();
 
 
-        setRequestState(
-          "idle",
-        );
+          if (
+            text?.includes(
+              "Request CV",
+            )
+          ) {
 
-        setMessage("");
+            event.preventDefault();
 
-        setIsOpen(
-          true,
-        );
-      };
+            openModal();
+
+          }
+
+        };
 
 
       document.addEventListener(
         "click",
-        handleRequestClick,
+        handler,
       );
 
 
-      return () => {
-
+      return () =>
         document.removeEventListener(
           "click",
-          handleRequestClick,
+          handler,
         );
 
-      };
-
     },
-    [],
+    [
+      openModal,
+    ],
   );
 
-
-  /*
-    Lock page scrolling while modal is open.
-  */
 
   useEffect(
     () => {
 
       if (
-        !isOpen
+        !open
       ) {
 
         return;
+
       }
 
 
-      const previousOverflow =
+      const oldOverflow =
         document.body.style
           .overflow;
 
@@ -226,76 +253,135 @@ export function CvRequestModal() {
         "hidden";
 
 
-      const focusTimer =
-        window.setTimeout(
-          () => {
+      const keyHandler =
+        (
+          event:
+            KeyboardEvent,
+        ) => {
 
-            if (
-              requestState ===
-              "idle" ||
-              requestState ===
-              "error"
-            ) {
+          if (
+            event.key ===
+              "Escape" &&
+            status !==
+              "sending"
+          ) {
 
-              inputRef.current
-                ?.focus();
-            }
+            setOpen(
+              false,
+            );
 
-          },
-          120,
-        );
+          }
 
-
-      const handleKeyDown = (
-        event: KeyboardEvent,
-      ) => {
-
-        if (
-          event.key ===
-          "Escape"
-        ) {
-
-          closeModal();
-        }
-
-      };
+        };
 
 
       window.addEventListener(
         "keydown",
-        handleKeyDown,
+        keyHandler,
       );
+
+
+      const timer =
+        window.setTimeout(
+          () =>
+            inputRef.current
+              ?.focus(),
+          120,
+        );
 
 
       return () => {
 
         window.clearTimeout(
-          focusTimer,
+          timer,
         );
-
-
-        document.body.style
-          .overflow =
-          previousOverflow;
-
 
         window.removeEventListener(
           "keydown",
-          handleKeyDown,
+          keyHandler,
+        );
+
+        document.body.style
+          .overflow =
+          oldOverflow;
+
+      };
+
+    },
+    [
+      open,
+      status,
+    ],
+  );
+
+
+  useEffect(
+    () => {
+
+      if (
+        status !==
+        "sending"
+      ) {
+
+        return;
+
+      }
+
+
+      const first =
+        window.setTimeout(
+          () =>
+            setAnimationStep(
+              1,
+            ),
+          650,
+        );
+
+
+      const second =
+        window.setTimeout(
+          () =>
+            setAnimationStep(
+              2,
+            ),
+          1350,
+        );
+
+
+      const third =
+        window.setTimeout(
+          () =>
+            setAnimationStep(
+              3,
+            ),
+          2050,
+        );
+
+
+      return () => {
+
+        window.clearTimeout(
+          first,
+        );
+
+        window.clearTimeout(
+          second,
+        );
+
+        window.clearTimeout(
+          third,
         );
 
       };
 
     },
     [
-      closeModal,
-      isOpen,
-      requestState,
+      status,
     ],
   );
 
 
-  async function handleSubmit(
+  async function submit(
     event:
       FormEvent<HTMLFormElement>,
   ) {
@@ -303,117 +389,174 @@ export function CvRequestModal() {
     event.preventDefault();
 
 
-    if (
-      requestState ===
-      "sending"
-    ) {
-
-      return;
-    }
-
-
-    const normalizedEmail =
+    const normalized =
       email
         .trim()
         .toLowerCase();
 
 
     if (
-      !normalizedEmail
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+        normalized,
+      )
     ) {
 
-      setRequestState(
+      setStatus(
         "error",
       );
 
-
       setMessage(
-        "Please enter your email address.",
+        "Please enter a valid email address.",
       );
 
       return;
+
     }
 
 
-    setRequestState(
+    setAnimationStep(
+      0,
+    );
+
+    setStatus(
       "sending",
     );
 
-    setMessage("");
+    setMessage(
+      "",
+    );
 
 
     try {
 
-      const response =
-        await fetch(
+      const request =
+        fetch(
           "/api/request-cv",
           {
+
             method:
               "POST",
 
             headers: {
+
               "Content-Type":
                 "application/json",
+
             },
 
             body:
               JSON.stringify({
-                email:
-                  normalizedEmail,
 
-                website,
+                email:
+                  normalized,
+
+                language,
+
+                website:
+                  "",
+
               }),
+
           },
         );
 
 
-      const result =
-        (await response.json()) as {
-          success?: boolean;
+      /*
+        Guarantee enough time for the
+        secure-delivery animation to
+        actually be visible.
+      */
 
-          error?: string;
+      const minimumAnimation =
+        new Promise<void>(
+          (
+            resolve,
+          ) => {
 
-          message?: string;
-        };
+            window.setTimeout(
+              resolve,
+              2600,
+            );
+
+          },
+        );
+
+
+      const [
+        response,
+      ] =
+        await Promise.all([
+
+          request,
+
+          minimumAnimation,
+
+        ]);
+
+
+      const payload =
+        await response.json();
 
 
       if (
-        !response.ok ||
-        !result.success
+        !response.ok
       ) {
 
         throw new Error(
-          result.error ||
-            "Unable to send the CV.",
+          payload.error ||
+          "The CV could not be sent.",
         );
+
       }
 
 
-      setRequestState(
+      setAnimationStep(
+        4,
+      );
+
+
+      await new Promise<void>(
+        (
+          resolve,
+        ) => {
+
+          window.setTimeout(
+            resolve,
+            350,
+          );
+
+        },
+      );
+
+
+      setStatus(
         "success",
       );
 
 
       setMessage(
-        normalizedEmail,
+        normalized,
       );
 
 
-    } catch (
+  } catch (
       error
     ) {
 
-      setRequestState(
+      setStatus(
         "error",
       );
 
 
       setMessage(
-        error instanceof Error
+
+        error
+          instanceof Error
 
           ? error.message
 
-          : "Unable to send the CV.",
+          : "The CV could not be sent.",
+
       );
 
     }
@@ -422,370 +565,313 @@ export function CvRequestModal() {
 
 
   if (
-    !isOpen
+    !open
   ) {
 
     return null;
+
   }
+
+
+  const selected =
+    languages.find(
+      (
+        item,
+      ) =>
+        item.value ===
+        language,
+    )!;
 
 
   return (
 
     <div
-      className="cv-request-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="cv-request-title"
-      onMouseDown={(
-        event,
-      ) => {
+      className="cv-request-overlay cv-secure-overlay"
+      onMouseDown={
+        (
+          event,
+        ) => {
 
-        if (
-          event.target ===
-          event.currentTarget
-        ) {
+          if (
+            event.target ===
+              event.currentTarget
+          ) {
 
-          closeModal();
+            closeModal();
+
+          }
+
         }
-
-      }}
+      }
     >
 
-      <div className="cv-request-dialog">
+      <section
+        className="cv-request-modal cv-language-modal cv-secure-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cv-modal-title"
+      >
 
+        <div className="cv-request-terminal-bar">
 
-        <header className="cv-request-header">
-
-          <div className="cv-request-heading">
-
-            <span>
-              TBEM · CV DELIVERY
-            </span>
-
-            <h2 id="cv-request-title">
-
-              {requestState ===
-              "sending"
-
-                ? "Preparing delivery"
-
-                : requestState ===
-                    "success"
-
-                  ? "Delivery complete"
-
-                  : "Request my CV"}
-
-            </h2>
-
-          </div>
+          <span>
+            TBEM.
+            <strong>
+              CV
+            </strong>
+          </span>
 
 
           <button
             type="button"
-            className="cv-request-close"
             onClick={
               closeModal
             }
             disabled={
-              requestState ===
+              status ===
               "sending"
             }
-            aria-label="Close CV request"
+            aria-label="Close"
           >
             ×
           </button>
 
-        </header>
+        </div>
 
 
-        {requestState ===
+        {status ===
         "sending" ? (
 
-          <div
-            className="cv-send-loader"
-            role="status"
-            aria-live="polite"
-          >
+          <div className="cv-secure-sending">
 
-            <div className="cv-send-loader-brand">
+            <div className="cv-secure-eyebrow">
+              TBEM. SECURE DELIVERY SYSTEM
+            </div>
 
-              <span className="cv-send-loader-logo">
-                TBEM.
+
+            <div className="cv-secure-command">
+              $ dispatch_cv
+              <span className="cv-secure-cursor">
+                _
               </span>
+            </div>
 
-              <span>
-                SECURE DELIVERY SYSTEM
-              </span>
+
+            <div className="cv-secure-orbit">
+
+              <span />
+
+              <i />
+
+              <strong>
+                {Math.min(
+                  animationStep + 1,
+                  4,
+                )}
+              </strong>
 
             </div>
 
 
-            <div className="cv-send-terminal">
+            <div className="cv-secure-steps">
 
-              <div className="cv-send-command">
-
+              <div
+                className={
+                  animationStep >= 0
+                    ? "is-active"
+                    : ""
+                }
+              >
                 <span>
-                  $
+                  01
                 </span>
 
-                <code>
-                  dispatch_cv
-                </code>
-
-              </div>
-
-
-              <div className="cv-send-recipient">
-
-                <span>
-                  recipient
-                </span>
+                Validate recipient
 
                 <strong>
-                  {email}
+                  {animationStep > 0
+                    ? "done"
+                    : "running"}
                 </strong>
-
-              </div>
-
-
-              <div className="cv-send-sequence">
-
-
-                <div className="cv-send-step cv-send-step--1">
-
-                  <span className="cv-send-step-indicator">
-                    01
-                  </span>
-
-                  <span>
-                    validating request
-                  </span>
-
-                  <span className="cv-send-step-status">
-                    done
-                  </span>
-
-                </div>
-
-
-                <div className="cv-send-step cv-send-step--2">
-
-                  <span className="cv-send-step-indicator">
-                    02
-                  </span>
-
-                  <span>
-                    preparing CV
-                  </span>
-
-                  <span className="cv-send-step-status">
-                    ready
-                  </span>
-
-                </div>
-
-
-                <div className="cv-send-step cv-send-step--3">
-
-                  <span className="cv-send-step-indicator">
-                    03
-                  </span>
-
-                  <span>
-                    establishing secure mail channel
-                  </span>
-
-                  <span className="cv-send-step-status">
-                    sending
-                  </span>
-
-                </div>
-
-
               </div>
 
 
               <div
-                className="cv-send-progress"
-                aria-hidden="true"
+                className={
+                  animationStep >= 1
+                    ? "is-active"
+                    : ""
+                }
               >
+                <span>
+                  02
+                </span>
 
-                <span />
+                Select {selected.title} CV
 
+                <strong>
+                  {animationStep > 1
+                    ? "done"
+                    : animationStep === 1
+                      ? "running"
+                      : "waiting"}
+                </strong>
               </div>
 
 
-              <div className="cv-send-live">
-
-                <span className="cv-send-pulse" />
-
-                Sending your CV
-
-                <span className="cv-send-dots">
-                  ...
+              <div
+                className={
+                  animationStep >= 2
+                    ? "is-active"
+                    : ""
+                }
+              >
+                <span>
+                  03
                 </span>
 
+                Encrypt mail transport
+
+                <strong>
+                  {animationStep > 2
+                    ? "done"
+                    : animationStep === 2
+                      ? "running"
+                      : "waiting"}
+                </strong>
+              </div>
+
+
+              <div
+                className={
+                  animationStep >= 3
+                    ? "is-active"
+                    : ""
+                }
+              >
+                <span>
+                  04
+                </span>
+
+                Attach document & dispatch
+
+                <strong>
+                  {animationStep >= 4
+                    ? "sent"
+                    : animationStep === 3
+                      ? "running"
+                      : "waiting"}
+                </strong>
               </div>
 
             </div>
 
 
-            <p className="cv-send-wait">
-              Please keep this window open for a moment.
+            <div className="cv-secure-progress">
+
+              <span />
+
+            </div>
+
+
+            <p className="cv-secure-status">
+
+              <i />
+
+              Securely delivering your CV by email...
+
             </p>
 
           </div>
 
-
-        ) : requestState ===
+        ) : status ===
         "success" ? (
 
-          <div className="cv-request-success">
+          <div className="cv-secure-success">
+
+            <div className="cv-secure-eyebrow">
+              TBEM. SECURE DELIVERY SYSTEM
+            </div>
 
 
-            <div className="cv-success-terminal-line">
+            <div className="cv-secure-command">
+              $ delivery_complete
+            </div>
+
+
+            <div className="cv-secure-check">
 
               <span>
-                $
+                ✓
               </span>
 
-              delivery_complete
-
             </div>
 
 
-            <div
-              className="cv-request-success-icon"
-              aria-hidden="true"
-            >
-              ✓
-            </div>
-
-
-            <h3>
+            <h2>
               CV sent successfully.
-            </h3>
+            </h2>
 
 
-            <p className="cv-success-recipient">
-
-              Sent to
+            <p>
 
               <strong>
-                {message}
+                {selected.title}
               </strong>
+
+              {" "}
+              version sent to
+
+              {" "}
+
+              <span>
+                {message}
+              </span>
 
             </p>
 
 
-            <div
-              className="cv-spam-warning"
-              role="note"
-            >
+            <div className="cv-secure-email-only">
 
-              <div className="cv-spam-warning-icon">
-                !
-              </div>
+              <strong>
+                Email delivery only
+              </strong>
 
-
-              <div>
-
-                <strong>
-                  Please check your Spam / Junk folder.
-                </strong>
-
-                <p>
-                  If the email is not visible in your inbox,
-                  it may have been placed in Spam.
-                  Open it and mark it as
-                  <strong> Not spam</strong>.
-                </p>
-
-              </div>
+              <span>
+                The CV is not available as a direct
+                download from this website. The PDF
+                is attached to the email that was
+                just sent.
+              </span>
 
             </div>
 
 
-            <div className="cv-mail-actions">
-
+            <div className="cv-secure-mail-actions">
 
               <a
-                href={
-                  GMAIL_INBOX_URL
-                }
+                href="https://mail.google.com/mail/u/0/#inbox"
                 target="_blank"
-                rel="noopener noreferrer"
-                className="cv-mail-action cv-mail-action--primary"
+                rel="noreferrer"
               >
-
-                <span className="cv-mail-action-icon">
-                  M
-                </span>
-
-                <span>
-
-                  <strong>
-                    Open Gmail
-                  </strong>
-
-                  <small>
-                    Go directly to your inbox
-                  </small>
-
-                </span>
-
-                <span
-                  className="cv-mail-arrow"
-                  aria-hidden="true"
-                >
-                  ↗
-                </span>
-
+                Open Gmail
               </a>
 
 
               <a
-                href={
-                  GMAIL_SPAM_URL
-                }
+                href="https://mail.google.com/mail/u/0/#spam"
                 target="_blank"
-                rel="noopener noreferrer"
-                className="cv-mail-action cv-mail-action--spam"
+                rel="noreferrer"
               >
-
-                <span className="cv-mail-action-icon">
-                  !
-                </span>
-
-                <span>
-
-                  <strong>
-                    Check Spam
-                  </strong>
-
-                  <small>
-                    Open Gmail Spam directly
-                  </small>
-
-                </span>
-
-                <span
-                  className="cv-mail-arrow"
-                  aria-hidden="true"
-                >
-                  ↗
-                </span>
-
+                Check Spam
               </a>
-
 
             </div>
 
 
             <button
               type="button"
-              className="cv-success-close"
+              className="cv-request-submit"
               onClick={
                 closeModal
               }
@@ -793,37 +879,103 @@ export function CvRequestModal() {
               Close
             </button>
 
-
           </div>
-
 
         ) : (
 
           <form
             className="cv-request-form"
             onSubmit={
-              handleSubmit
+              submit
             }
           >
 
-            <div className="cv-request-intro">
-
-              <span className="cv-request-command">
-                $ request_cv
-              </span>
-
-              <p>
-                Enter your email address and
-                I&apos;ll send you access to my CV.
-              </p>
-
+            <div className="cv-request-kicker">
+              $ request_cv
             </div>
 
 
-            <label
-              className="cv-request-field"
-              htmlFor="cv-request-email"
+            <h2
+              id="cv-modal-title"
             >
+              Request my CV
+            </h2>
+
+
+            <p className="cv-request-intro">
+              Select your preferred language.
+              The CV will be delivered privately
+              to your email.
+            </p>
+
+
+            <fieldset className="cv-language-selector">
+
+              <legend>
+                CV language
+              </legend>
+
+
+              {languages.map(
+                (
+                  item,
+                ) => (
+
+                  <button
+                    key={
+                      item.value
+                    }
+                    type="button"
+                    className={
+                      language ===
+                      item.value
+
+                        ? "is-selected"
+
+                        : ""
+                    }
+                    onClick={
+                      () =>
+                        setLanguage(
+                          item.value,
+                        )
+                    }
+                  >
+
+                    <span className="cv-language-code">
+                      {item.value.toUpperCase()}
+                    </span>
+
+
+                    <span>
+
+                      <strong>
+                        {item.title}
+                      </strong>
+
+                      <small>
+                        {item.subtitle}
+                      </small>
+
+                    </span>
+
+
+                    <i>
+                      {language ===
+                      item.value
+                        ? "●"
+                        : "○"}
+                    </i>
+
+                  </button>
+
+                ),
+              )}
+
+            </fieldset>
+
+
+            <label className="cv-request-field">
 
               <span>
                 Email address
@@ -834,84 +986,45 @@ export function CvRequestModal() {
                 ref={
                   inputRef
                 }
-                id="cv-request-email"
-                name="email"
                 type="email"
-                inputMode="email"
-                autoComplete="email"
-                placeholder="you@example.com"
                 value={
                   email
                 }
-                onChange={(
-                  event,
-                ) => {
+                onChange={
+                  (
+                    event,
+                  ) => {
 
-                  setEmail(
-                    event.target.value,
-                  );
-
-
-                  if (
-                    requestState ===
-                    "error"
-                  ) {
-
-                    setRequestState(
-                      "idle",
+                    setEmail(
+                      event.target.value,
                     );
 
-                    setMessage("");
+                    if (
+                      status ===
+                      "error"
+                    ) {
+
+                      setStatus(
+                        "idle",
+                      );
+
+                    }
 
                   }
-
-                }}
+                }
+                placeholder="name@example.com"
                 required
-                maxLength={254}
+                autoComplete="email"
               />
 
             </label>
 
 
-            <div
-              className="cv-request-honeypot"
-              aria-hidden="true"
-            >
-
-              <label>
-
-                Website
-
-                <input
-                  name="website"
-                  type="text"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  value={
-                    website
-                  }
-                  onChange={(
-                    event,
-                  ) => {
-
-                    setWebsite(
-                      event.target.value,
-                    );
-
-                  }}
-                />
-
-              </label>
-
-            </div>
-
-
-            {requestState ===
-              "error" &&
-            message ? (
+            {status ===
+            "error" ? (
 
               <p
-                className="cv-request-message cv-request-message--error"
+                className="cv-request-error"
                 role="alert"
               >
                 {message}
@@ -924,30 +1037,20 @@ export function CvRequestModal() {
               type="submit"
               className="cv-request-submit"
             >
-
-              <span>
-                Send CV to my email
-              </span>
-
-              <span
-                aria-hidden="true"
-              >
-                →
-              </span>
-
+              Send {selected.title} CV
             </button>
 
 
             <p className="cv-request-privacy">
-              Your email is used only to deliver the requested CV.
+              No direct download link is exposed.
+              Your email is used only for CV delivery.
             </p>
 
           </form>
 
         )}
 
-
-      </div>
+      </section>
 
     </div>
 

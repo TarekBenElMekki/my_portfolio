@@ -13203,3 +13203,1925 @@ button.is-active {
   }
 
 }
+
+/* === BILINGUAL CV SELECTOR FINAL === */
+
+.cv-language-modal {
+
+  width:
+    min(
+      92vw,
+      520px
+    );
+
+}
+
+
+.cv-language-selector {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap:
+    10px;
+
+  margin:
+    22px
+    0;
+
+  padding:
+    0;
+
+  border:
+    0;
+
+}
+
+
+.cv-language-selector
+legend {
+
+  grid-column:
+    1 /
+    -1;
+
+  margin-bottom:
+    3px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.44
+    );
+
+  font-size:
+    0.64rem;
+
+  font-weight:
+    600;
+
+  letter-spacing:
+    0.08em;
+
+  text-transform:
+    uppercase;
+
+}
+
+
+.cv-language-selector
+button {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    auto
+    minmax(
+      0,
+      1fr
+    )
+    auto;
+
+  align-items:
+    center;
+
+  gap:
+    11px;
+
+  min-height:
+    76px;
+
+  padding:
+    12px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.1
+    );
+
+  border-radius:
+    9px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.018
+    );
+
+  color:
+    #ffffff;
+
+  text-align:
+    left;
+
+  cursor:
+    pointer;
+
+  transition:
+    border-color
+    160ms
+    ease,
+    background
+    160ms
+    ease,
+    transform
+    160ms
+    ease;
+
+}
+
+
+.cv-language-selector
+button:hover {
+
+  border-color:
+    rgba(
+      59,
+      130,
+      246,
+      0.42
+    );
+
+  background:
+    rgba(
+      59,
+      130,
+      246,
+      0.045
+    );
+
+}
+
+
+.cv-language-selector
+button.is-selected {
+
+  border-color:
+    rgba(
+      59,
+      130,
+      246,
+      0.82
+    );
+
+  background:
+    rgba(
+      59,
+      130,
+      246,
+      0.09
+    );
+
+}
+
+
+.cv-language-code {
+
+  display:
+    grid;
+
+  width:
+    34px;
+
+  height:
+    34px;
+
+  place-items:
+    center;
+
+  border:
+    1px solid
+    rgba(
+      59,
+      130,
+      246,
+      0.26
+    );
+
+  border-radius:
+    6px;
+
+  background:
+    rgba(
+      59,
+      130,
+      246,
+      0.07
+    );
+
+  color:
+    #7aa6ff;
+
+  font-family:
+    "SFMono-Regular",
+    Consolas,
+    monospace;
+
+  font-size:
+    0.61rem;
+
+  font-weight:
+    700;
+
+}
+
+
+.cv-language-selector
+button >
+span:nth-child(
+  2
+) {
+
+  display:
+    grid;
+
+  min-width:
+    0;
+
+  gap:
+    3px;
+
+}
+
+
+.cv-language-selector
+strong {
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.94
+    );
+
+  font-size:
+    0.74rem;
+
+  font-weight:
+    600;
+
+}
+
+
+.cv-language-selector
+small {
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.38
+    );
+
+  font-size:
+    0.57rem;
+
+}
+
+
+.cv-language-selector
+i {
+
+  color:
+    #3b82f6;
+
+  font-size:
+    0.72rem;
+
+  font-style:
+    normal;
+
+}
+
+
+.cv-language-success-actions {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:
+    8px;
+
+  margin:
+    18px
+    0;
+
+}
+
+
+.cv-language-success-actions
+a {
+
+  display:
+    flex;
+
+  min-height:
+    42px;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  padding:
+    0
+    12px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.12
+    );
+
+  border-radius:
+    7px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.025
+    );
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.78
+    );
+
+  font-size:
+    0.66rem;
+
+  font-weight:
+    600;
+
+  text-align:
+    center;
+
+  text-decoration:
+    none;
+
+}
+
+
+.cv-language-success-actions
+.cv-language-download {
+
+  grid-column:
+    1 /
+    -1;
+
+  border-color:
+    #3b82f6;
+
+  background:
+    #3b82f6;
+
+  color:
+    #ffffff;
+
+}
+
+
+.cv-language-success-actions
+a:hover {
+
+  border-color:
+    rgba(
+      59,
+      130,
+      246,
+      0.7
+    );
+
+}
+
+
+.cv-request-honeypot {
+
+  position:
+    absolute;
+
+  width:
+    1px;
+
+  height:
+    1px;
+
+  overflow:
+    hidden;
+
+  clip:
+    rect(
+      0,
+      0,
+      0,
+      0
+    );
+
+  opacity:
+    0;
+
+  pointer-events:
+    none;
+
+}
+
+
+@media (
+  max-width:
+  560px
+) {
+
+  .cv-language-selector {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+
+  .cv-language-selector
+  button {
+
+    min-height:
+      68px;
+
+  }
+
+}
+
+/* === ABOUT PROFILE TYPOGRAPHY FINAL === */
+
+.about-profile-copy {
+
+  margin:
+    0;
+
+  max-width:
+    760px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.62
+    );
+
+  font-size:
+    clamp(
+      1rem,
+      1.45vw,
+      1.2rem
+    );
+
+  font-weight:
+    300;
+
+  line-height:
+    1.75;
+
+}
+
+
+.about-profile-lead {
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.94
+    );
+
+  font-size:
+    0.94em;
+
+  font-weight:
+    650;
+
+  line-height:
+    1.6;
+
+}
+
+
+.about-profile-detail {
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.5
+    );
+
+  font-weight:
+    300;
+
+}
+
+
+@media (
+  max-width:
+  760px
+) {
+
+  .about-profile-copy {
+
+    font-size:
+      0.96rem;
+
+    line-height:
+      1.7;
+
+  }
+
+
+  .about-profile-lead {
+
+    font-size:
+      0.92em;
+
+  }
+
+}
+
+/* === ABOUT SIZE + CENTERED CV MODAL FINAL === */
+
+
+/* ------------------------------------------------------------
+   ABOUT
+   Restore the original text scale.
+------------------------------------------------------------ */
+
+.about-profile-copy {
+
+  font-size:
+    clamp(
+      1rem,
+      1.45vw,
+      1.2rem
+    ) !important;
+
+  font-weight:
+    300;
+
+  line-height:
+    1.75;
+
+}
+
+
+.about-profile-lead {
+
+  font-size:
+    1em !important;
+
+  font-weight:
+    650;
+
+  line-height:
+    inherit;
+
+}
+
+
+.about-profile-detail {
+
+  font-size:
+    1em !important;
+
+  font-weight:
+    300;
+
+  line-height:
+    inherit;
+
+}
+
+
+/* ------------------------------------------------------------
+   CV REQUEST
+   True centered modal — NOT a sidebar.
+------------------------------------------------------------ */
+
+.cv-request-overlay {
+
+  position:
+    fixed !important;
+
+  inset:
+    0 !important;
+
+  z-index:
+    9999 !important;
+
+  display:
+    flex !important;
+
+  align-items:
+    center !important;
+
+  justify-content:
+    center !important;
+
+  width:
+    100vw !important;
+
+  height:
+    100dvh !important;
+
+  padding:
+    24px !important;
+
+  overflow-y:
+    auto !important;
+
+  background:
+    rgba(
+      0,
+      0,
+      0,
+      0.72
+    ) !important;
+
+  backdrop-filter:
+    blur(
+      9px
+    );
+
+  -webkit-backdrop-filter:
+    blur(
+      9px
+    );
+
+}
+
+
+.cv-request-modal,
+.cv-language-modal {
+
+  position:
+    relative !important;
+
+  inset:
+    auto !important;
+
+  top:
+    auto !important;
+
+  right:
+    auto !important;
+
+  bottom:
+    auto !important;
+
+  left:
+    auto !important;
+
+  transform:
+    none !important;
+
+  float:
+    none !important;
+
+  display:
+    block !important;
+
+  width:
+    min(
+      100%,
+      560px
+    ) !important;
+
+  max-width:
+    560px !important;
+
+  height:
+    auto !important;
+
+  max-height:
+    calc(
+      100dvh -
+      48px
+    ) !important;
+
+  margin:
+    auto !important;
+
+  overflow-y:
+    auto !important;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.12
+    ) !important;
+
+  border-radius:
+    14px !important;
+
+  background:
+    #0b0b0b !important;
+
+  box-shadow:
+    0
+    28px
+    90px
+    rgba(
+      0,
+      0,
+      0,
+      0.62
+    ) !important;
+
+}
+
+
+.cv-request-terminal-bar {
+
+  position:
+    sticky;
+
+  top:
+    0;
+
+  z-index:
+    4;
+
+  border-radius:
+    14px
+    14px
+    0
+    0;
+
+  background:
+    #0b0b0b;
+
+}
+
+
+/* Remove any sidebar/drawer behavior inherited from older CSS */
+
+.cv-request-overlay
+.cv-request-modal {
+
+  margin-left:
+    auto !important;
+
+  margin-right:
+    auto !important;
+
+  animation:
+    cvCenteredModalIn
+    180ms
+    ease-out !important;
+
+}
+
+
+@keyframes
+cvCenteredModalIn {
+
+  from {
+
+    opacity:
+      0;
+
+    transform:
+      translateY(
+        12px
+      )
+      scale(
+        0.985
+      );
+
+  }
+
+
+  to {
+
+    opacity:
+      1;
+
+    transform:
+      translateY(
+        0
+      )
+      scale(
+        1
+      );
+
+  }
+
+}
+
+
+/* ------------------------------------------------------------
+   MOBILE
+------------------------------------------------------------ */
+
+@media (
+  max-width:
+  600px
+) {
+
+  .cv-request-overlay {
+
+    align-items:
+      center !important;
+
+    padding:
+      14px !important;
+
+  }
+
+
+  .cv-request-modal,
+  .cv-language-modal {
+
+    width:
+      100% !important;
+
+    max-width:
+      100% !important;
+
+    max-height:
+      calc(
+        100dvh -
+        28px
+      ) !important;
+
+    border-radius:
+      12px !important;
+
+  }
+
+
+  .about-profile-copy {
+
+    font-size:
+      0.96rem !important;
+
+    line-height:
+      1.7;
+
+  }
+
+
+  .about-profile-lead,
+  .about-profile-detail {
+
+    font-size:
+      1em !important;
+
+  }
+
+}
+
+/* === SECURE EMAIL-ONLY CV FINAL === */
+
+.cv-secure-overlay {
+
+  position:
+    fixed !important;
+
+  inset:
+    0 !important;
+
+  z-index:
+    10000 !important;
+
+  display:
+    flex !important;
+
+  align-items:
+    center !important;
+
+  justify-content:
+    center !important;
+
+  padding:
+    24px !important;
+
+  background:
+    rgba(
+      0,
+      0,
+      0,
+      0.78
+    ) !important;
+
+  backdrop-filter:
+    blur(10px);
+
+}
+
+
+.cv-secure-modal {
+
+  position:
+    relative !important;
+
+  inset:
+    auto !important;
+
+  width:
+    min(
+      560px,
+      calc(
+        100vw -
+        32px
+      )
+    ) !important;
+
+  height:
+    auto !important;
+
+  max-height:
+    calc(
+      100dvh -
+      36px
+    ) !important;
+
+  margin:
+    auto !important;
+
+  overflow-y:
+    auto !important;
+
+  transform:
+    none !important;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.13
+    ) !important;
+
+  border-radius:
+    14px !important;
+
+  background:
+    #0a0a0a !important;
+
+  box-shadow:
+    0
+    35px
+    100px
+    rgba(
+      0,
+      0,
+      0,
+      0.7
+    ) !important;
+
+  animation:
+    cvSecureModalEnter
+    240ms
+    cubic-bezier(
+      .2,
+      .8,
+      .2,
+      1
+    )
+    both !important;
+
+}
+
+
+@keyframes
+cvSecureModalEnter {
+
+  from {
+
+    opacity:
+      0;
+
+    transform:
+      translateY(16px)
+      scale(.975);
+
+  }
+
+  to {
+
+    opacity:
+      1;
+
+    transform:
+      translateY(0)
+      scale(1);
+
+  }
+
+}
+
+
+.cv-secure-sending,
+.cv-secure-success {
+
+  padding:
+    34px
+    30px
+    30px;
+
+}
+
+
+.cv-secure-eyebrow {
+
+  margin-bottom:
+    14px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      .52
+    );
+
+  font-size:
+    .68rem;
+
+  font-weight:
+    650;
+
+  letter-spacing:
+    .08em;
+
+}
+
+
+.cv-secure-command {
+
+  color:
+    #ffffff;
+
+  font-family:
+    Consolas,
+    monospace;
+
+  font-size:
+    1rem;
+
+}
+
+
+.cv-secure-cursor {
+
+  color:
+    #3b82f6;
+
+  animation:
+    cvSecureBlink
+    .65s
+    steps(1)
+    infinite;
+
+}
+
+
+@keyframes
+cvSecureBlink {
+
+  50% {
+
+    opacity:
+      0;
+
+  }
+
+}
+
+
+.cv-secure-orbit {
+
+  position:
+    relative;
+
+  display:
+    grid;
+
+  width:
+    94px;
+
+  height:
+    94px;
+
+  margin:
+    34px
+    auto;
+
+  place-items:
+    center;
+
+}
+
+
+.cv-secure-orbit
+span {
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  border:
+    1px solid
+    rgba(
+      59,
+      130,
+      246,
+      .2
+    );
+
+  border-radius:
+    50%;
+
+}
+
+
+.cv-secure-orbit
+i {
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  border:
+    2px solid
+    transparent;
+
+  border-top-color:
+    #3b82f6;
+
+  border-right-color:
+    rgba(
+      59,
+      130,
+      246,
+      .25
+    );
+
+  border-radius:
+    50%;
+
+  animation:
+    cvSecureSpin
+    1s
+    linear
+    infinite !important;
+
+}
+
+
+.cv-secure-orbit
+strong {
+
+  color:
+    #ffffff;
+
+  font-family:
+    Consolas,
+    monospace;
+
+  font-size:
+    1rem;
+
+}
+
+
+@keyframes
+cvSecureSpin {
+
+  to {
+
+    transform:
+      rotate(360deg);
+
+  }
+
+}
+
+
+.cv-secure-steps {
+
+  display:
+    grid;
+
+  gap:
+    6px;
+
+}
+
+
+.cv-secure-steps
+div {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    30px
+    1fr
+    auto;
+
+  gap:
+    10px;
+
+  align-items:
+    center;
+
+  min-height:
+    38px;
+
+  padding:
+    0
+    10px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .055
+    );
+
+  border-radius:
+    7px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      .32
+    );
+
+  font-size:
+    .7rem;
+
+  transition:
+    color
+    240ms,
+    border-color
+    240ms,
+    background
+    240ms;
+
+}
+
+
+.cv-secure-steps
+div.is-active {
+
+  border-color:
+    rgba(
+      59,
+      130,
+      246,
+      .22
+    );
+
+  background:
+    rgba(
+      59,
+      130,
+      246,
+      .045
+    );
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      .82
+    );
+
+}
+
+
+.cv-secure-steps
+span {
+
+  color:
+    #55729f;
+
+  font-family:
+    Consolas,
+    monospace;
+
+}
+
+
+.cv-secure-steps
+strong {
+
+  color:
+    #3b82f6;
+
+  font-family:
+    Consolas,
+    monospace;
+
+  font-size:
+    .58rem;
+
+  font-weight:
+    500;
+
+}
+
+
+.cv-secure-progress {
+
+  height:
+    3px;
+
+  margin-top:
+    24px;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .06
+    );
+
+}
+
+
+.cv-secure-progress
+span {
+
+  display:
+    block;
+
+  width:
+    38%;
+
+  height:
+    100%;
+
+  border-radius:
+    inherit;
+
+  background:
+    #3b82f6;
+
+  animation:
+    cvSecureProgress
+    1.35s
+    ease-in-out
+    infinite !important;
+
+}
+
+
+@keyframes
+cvSecureProgress {
+
+  from {
+
+    transform:
+      translateX(-115%);
+
+  }
+
+  to {
+
+    transform:
+      translateX(310%);
+
+  }
+
+}
+
+
+.cv-secure-status {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    8px;
+
+  margin:
+    12px
+    0
+    0;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      .42
+    );
+
+  font-size:
+    .65rem;
+
+}
+
+
+.cv-secure-status
+i {
+
+  width:
+    7px;
+
+  height:
+    7px;
+
+  border-radius:
+    50%;
+
+  background:
+    #3b82f6;
+
+  box-shadow:
+    0
+    0
+    0
+    0
+    rgba(
+      59,
+      130,
+      246,
+      .5
+    );
+
+  animation:
+    cvSecurePulse
+    1.15s
+    infinite !important;
+
+}
+
+
+@keyframes
+cvSecurePulse {
+
+  70% {
+
+    box-shadow:
+      0
+      0
+      0
+      8px
+      rgba(
+        59,
+        130,
+        246,
+        0
+      );
+
+  }
+
+}
+
+
+.cv-secure-success {
+
+  animation:
+    cvSecureSuccessEnter
+    420ms
+    ease
+    both !important;
+
+}
+
+
+@keyframes
+cvSecureSuccessEnter {
+
+  from {
+
+    opacity:
+      0;
+
+    transform:
+      translateY(10px);
+
+  }
+
+  to {
+
+    opacity:
+      1;
+
+    transform:
+      translateY(0);
+
+  }
+
+}
+
+
+.cv-secure-check {
+
+  display:
+    grid;
+
+  width:
+    62px;
+
+  height:
+    62px;
+
+  margin:
+    28px
+    0
+    20px;
+
+  place-items:
+    center;
+
+  border:
+    1px solid
+    rgba(
+      59,
+      130,
+      246,
+      .5
+    );
+
+  border-radius:
+    50%;
+
+  background:
+    rgba(
+      59,
+      130,
+      246,
+      .08
+    );
+
+  animation:
+    cvSecureCheckPop
+    520ms
+    cubic-bezier(
+      .15,
+      .9,
+      .3,
+      1.4
+    )
+    both !important;
+
+}
+
+
+.cv-secure-check
+span {
+
+  color:
+    #3b82f6;
+
+  font-size:
+    1.55rem;
+
+  animation:
+    cvSecureCheckDraw
+    420ms
+    180ms
+    both !important;
+
+}
+
+
+@keyframes
+cvSecureCheckPop {
+
+  from {
+
+    opacity:
+      0;
+
+    transform:
+      scale(.55);
+
+  }
+
+  to {
+
+    opacity:
+      1;
+
+    transform:
+      scale(1);
+
+  }
+
+}
+
+
+@keyframes
+cvSecureCheckDraw {
+
+  from {
+
+    opacity:
+      0;
+
+    transform:
+      scale(.4)
+      rotate(-20deg);
+
+  }
+
+  to {
+
+    opacity:
+      1;
+
+    transform:
+      scale(1)
+      rotate(0);
+
+  }
+
+}
+
+
+.cv-secure-success
+h2 {
+
+  margin:
+    0
+    0
+    10px;
+
+}
+
+
+.cv-secure-success
+>
+p {
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      .68
+    );
+
+  line-height:
+    1.65;
+
+}
+
+
+.cv-secure-email-only {
+
+  display:
+    grid;
+
+  gap:
+    5px;
+
+  margin:
+    22px
+    0;
+
+  padding:
+    14px
+    16px;
+
+  border:
+    1px solid
+    rgba(
+      59,
+      130,
+      246,
+      .22
+    );
+
+  border-radius:
+    8px;
+
+  background:
+    rgba(
+      59,
+      130,
+      246,
+      .045
+    );
+
+}
+
+
+.cv-secure-email-only
+strong {
+
+  color:
+    #8bb1ff;
+
+  font-size:
+    .7rem;
+
+}
+
+
+.cv-secure-email-only
+span {
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      .48
+    );
+
+  font-size:
+    .65rem;
+
+  line-height:
+    1.6;
+
+}
+
+
+.cv-secure-mail-actions {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:
+    8px;
+
+  margin-bottom:
+    10px;
+
+}
+
+
+.cv-secure-mail-actions
+a {
+
+  display:
+    flex;
+
+  min-height:
+    44px;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .1
+    );
+
+  border-radius:
+    7px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      .72
+    );
+
+  font-size:
+    .68rem;
+
+  font-weight:
+    600;
+
+  text-decoration:
+    none;
+
+}
+
+
+.cv-secure-mail-actions
+a:hover {
+
+  border-color:
+    rgba(
+      59,
+      130,
+      246,
+      .5
+    );
+
+}
+
+
+@media (
+  max-width:
+  600px
+) {
+
+  .cv-secure-overlay {
+
+    padding:
+      12px !important;
+
+  }
+
+
+  .cv-secure-modal {
+
+    width:
+      100% !important;
+
+    max-height:
+      calc(
+        100dvh -
+        24px
+      ) !important;
+
+  }
+
+
+  .cv-secure-sending,
+  .cv-secure-success {
+
+    padding:
+      26px
+      20px
+      22px;
+
+  }
+
+
+  .cv-secure-mail-actions {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+}
